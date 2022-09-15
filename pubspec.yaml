@@ -1,0 +1,38 @@
+name: neyasischallenge
+description: Neyasis Challenge Project.
+publish_to: 'none'
+version: 1.0.0+1
+environment:
+  sdk: ">=2.17.6 <3.0.0"
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  # Route
+  auto_route: ^5.0.1
+  # State Management
+  bloc: ^8.1.0
+  flutter_bloc: ^8.1.1
+  # Core
+  form_builder_validators: ^8.1.1
+  json_annotation: ^4.6.0
+  freezed_annotation: ^2.1.0
+  equatable: ^2.0.5
+  dio: ^4.0.6
+  intl: ^0.17.0
+  easy_localization: ^3.0.1
+  get_it: ^7.2.0
+  xml: ^6.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  freezed: ^2.1.0+1
+  json_serializable: ^6.3.1
+  auto_route_generator: ^5.0.2
+  build_runner: ^2.2.0
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/lang/

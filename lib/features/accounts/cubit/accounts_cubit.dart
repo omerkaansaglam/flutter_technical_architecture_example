@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:neyasischallenge/core/extension/context_extension.dart';
+import 'package:neyasischallenge/core/init/lang/locale_keys.g.dart';
 import 'package:neyasischallenge/features/accounts/model/accounts_response_model.dart';
 import 'package:neyasischallenge/features/accounts/service/accounts_service.dart';
 import 'package:neyasischallenge/features/add_or_update_account/model/account_response_model.dart';
@@ -22,7 +24,7 @@ class AccountsCubit extends Cubit<AccountsState> {
           accounts: result.accounts, totalCount: result.totalCount, totalPage: totalPage, currentPage: page));
     } catch (e) {
       print(e);
-      emit(const AccountsState.error(message: 'Üzgünüz bir hata ile karşılaştık'));
+      emit(AccountsState.error(message: LocaleKeys.exceptionError.locale));
       rethrow;
     }
   }

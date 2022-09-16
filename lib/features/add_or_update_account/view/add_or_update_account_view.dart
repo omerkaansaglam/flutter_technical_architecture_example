@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:neyasischallenge/core/extension/context_extension.dart';
+import 'package:neyasischallenge/core/init/lang/locale_keys.g.dart';
 import 'package:neyasischallenge/features/add_or_update_account/cubit/add_or_update_account_cubit.dart';
 import 'package:neyasischallenge/features/add_or_update_account/model/account_response_model.dart';
 import 'package:neyasischallenge/features/add_or_update_account/service/add_or_update_account_service.dart';
@@ -47,7 +49,7 @@ class _AddOrUpdateAccountViewState extends State<AddOrUpdateAccountView> {
       create: (context) => AddOrUpdateAccountCubit(AddOrUpdateAccountService()),
       child: Scaffold(
           appBar: AppBar(
-            title: const Text("Create Account"),
+            title: Text(LocaleKeys.createAccount.locale),
           ),
           body: Form(
             key: _formKey,
@@ -56,24 +58,24 @@ class _AddOrUpdateAccountViewState extends State<AddOrUpdateAccountView> {
                 CustomTextFormField(
                     controller: identityController,
                     onSaved: (newValue) => {identityController.text = newValue ?? ""},
-                    title: "Identity",
+                    title: LocaleKeys.identity.locale,
                     validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(errorText: "Bu alan zorunludur."),
-                      FormBuilderValidators.numeric(errorText: "Sadece rakamlardan oluşmalıdır."),
-                      FormBuilderValidators.minLength(11, errorText: "En az 11 haneli olmalıdır."),
-                      FormBuilderValidators.maxLength(11, errorText: "En fazla 11 haneli olmalıdır."),
+                      FormBuilderValidators.required(errorText: LocaleKeys.validateRequired.locale),
+                      FormBuilderValidators.numeric(errorText: LocaleKeys.validateNumeric.locale),
+                      FormBuilderValidators.minLength(11, errorText: LocaleKeys.validateMinLength.locale),
+                      FormBuilderValidators.maxLength(11, errorText: LocaleKeys.validateMaxLength.locale),
                     ])),
                 CustomTextFormField(
                   controller: nameController,
                   onSaved: (newValue) => {nameController.text = newValue ?? ""},
-                  title: "Name",
-                  validator: FormBuilderValidators.required(errorText: "Bu alan zorunludur."),
+                  title: LocaleKeys.name.locale,
+                  validator: FormBuilderValidators.required(errorText: LocaleKeys.validateRequired.locale),
                 ),
                 TextFormField(
                   controller: surnameController,
                   onSaved: (newValue) => surnameController.text = newValue ?? "",
-                  decoration: const InputDecoration(label: Text("Surname")),
-                  validator: FormBuilderValidators.required(errorText: "Bu alan zorunludur."),
+                  decoration: InputDecoration(label: Text(LocaleKeys.surname.locale)),
+                  validator: FormBuilderValidators.required(errorText: LocaleKeys.validateRequired.locale),
                 ),
                 InkWell(
                   onTap: () async {
@@ -88,7 +90,7 @@ class _AddOrUpdateAccountViewState extends State<AddOrUpdateAccountView> {
                   },
                   child: CustomTextFormField(
                     inputEnabled: true,
-                    title: "Birth Date",
+                    title: LocaleKeys.birthDate.locale,
                     controller: birtDateController,
                     onSaved: (newValue) => birtDateController.text = newValue ?? "",
                   ),
@@ -96,18 +98,18 @@ class _AddOrUpdateAccountViewState extends State<AddOrUpdateAccountView> {
                 TextFormField(
                   controller: sallaryController,
                   onSaved: (newValue) => sallaryController.text = newValue ?? "",
-                  decoration: const InputDecoration(label: Text("Sallary")),
+                  decoration: InputDecoration(label: Text(LocaleKeys.sallary.locale)),
                   validator: FormBuilderValidators.compose([
-                    FormBuilderValidators.required(errorText: "Bu alan zorunludur."),
-                    FormBuilderValidators.numeric(errorText: "Sadece rakamlardan oluşmalıdır."),
+                    FormBuilderValidators.required(errorText: LocaleKeys.validateRequired.locale),
+                    FormBuilderValidators.numeric(errorText: LocaleKeys.validateNumeric.locale),
                   ]),
                 ),
                 TextFormField(
                   controller: phoneNumberController,
                   onSaved: (newValue) => phoneNumberController.text = newValue ?? "",
-                  decoration: const InputDecoration(label: Text("Phone")),
+                  decoration: InputDecoration(label: Text(LocaleKeys.phone.locale)),
                   validator: FormBuilderValidators.compose([
-                    FormBuilderValidators.required(errorText: "Bu alan zorunludur."),
+                    FormBuilderValidators.required(errorText: LocaleKeys.validateRequired.locale),
                   ]),
                 ),
                 BlocConsumer<AddOrUpdateAccountCubit, AddOrUpdateAccountState>(
@@ -148,6 +150,6 @@ class _AddOrUpdateAccountViewState extends State<AddOrUpdateAccountView> {
                     identity: int.parse(identityController.text)));
           }
         },
-        child: const Text("Create"));
+        child: Text(LocaleKeys.create.locale));
   }
 }

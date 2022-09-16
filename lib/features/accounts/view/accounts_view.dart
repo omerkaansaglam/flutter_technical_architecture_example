@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:neyasischallenge/core/extension/context_extension.dart';
+import 'package:neyasischallenge/core/init/lang/locale_keys.g.dart';
 import 'package:neyasischallenge/core/init/router/app_router.dart';
 import 'package:neyasischallenge/features/accounts/cubit/accounts_cubit.dart';
 import 'package:neyasischallenge/features/accounts/service/accounts_service.dart';
@@ -15,7 +17,7 @@ class AccountsView extends StatelessWidget {
       create: (context) => AccountsCubit(AccountsService()),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Account List"),
+          title: Text(LocaleKeys.accountList.locale),
           actions: [
             IconButton(
                 onPressed: () {
@@ -69,17 +71,16 @@ class AccountsView extends StatelessWidget {
               onPressed: currentPage > 1
                   ? () => context.read<AccountsCubit>().nextOrBackAccounts(isNext: false)
                   : null,
-              child: const Text('Geri'),
+              child: Text(LocaleKeys.back.locale),
             ),
             Chip(
               label: Text('$currentPage/${totalPage.toString()}'),
             ),
             TextButton(
-              onPressed: currentPage < totalPage
-                  ? () => context.read<AccountsCubit>().nextOrBackAccounts(isNext: true)
-                  : null,
-              child: const Text('İleri'),
-            ),
+                onPressed: currentPage < totalPage
+                    ? () => context.read<AccountsCubit>().nextOrBackAccounts(isNext: true)
+                    : null,
+                child: Text(LocaleKeys.next.locale)),
           ]),
         )
       ],
@@ -127,8 +128,8 @@ class AccountsView extends StatelessWidget {
     );
   }
 
-  Center _emptyWidget() => const Center(
-        child: Text("Kayıtlı hesap bulunmamaktadır."),
+  Center _emptyWidget() => Center(
+        child: Text(LocaleKeys.emptyAccountList.locale),
       );
 
   Center _loadingWidget() {
@@ -143,7 +144,7 @@ class AccountsView extends StatelessWidget {
           onPressed: () async {
             await context.read<AccountsCubit>().getAccounts(page: 1);
           },
-          child: const Text('Tekrar Dene')),
+          child: Text(LocaleKeys.tryAgain.locale)),
     );
   }
 }

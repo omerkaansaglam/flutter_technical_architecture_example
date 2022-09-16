@@ -1,4 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:neyasischallenge/core/extension/context_extension.dart';
+import 'package:neyasischallenge/core/init/lang/locale_keys.g.dart';
 
 part 'account_response_model.freezed.dart';
 part 'account_response_model.g.dart';
@@ -19,10 +21,11 @@ class AccountResponseModel with _$AccountResponseModel {
 }
 
 extension AccountModelExtension on AccountResponseModel {
-  String get fullName => 'Ad Soyad : $name $surname';
-  String get sallaryWithCurrentSembol => 'Maaş : $sallary ₺';
-  String get phone => 'Telefon : $phoneNumber';
-  String get identityNumber => 'Identity : $identity';
+  String get fullName => '${LocaleKeys.fullName.locale} : $name $surname';
+  String get sallaryWithCurrentSembol =>
+      '${LocaleKeys.sallary.locale} : $sallary ${LocaleKeys.currencySembol.locale}';
+  String get phone => '${LocaleKeys.phone.locale} : $phoneNumber';
+  String get identityNumber => '${LocaleKeys.identity.locale} : $identity';
   String get age =>
-      'Yaş : ${(birthDate.year - DateTime.now().year).isNegative ? 0 : birthDate.year - DateTime.now().year}';
+      '${LocaleKeys.age.locale} : ${(DateTime.now().year - birthDate.year).isNegative ? 0 : DateTime.now().year - birthDate.year}';
 }

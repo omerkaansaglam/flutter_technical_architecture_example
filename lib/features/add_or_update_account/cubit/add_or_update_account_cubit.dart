@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:neyasischallenge/core/extension/context_extension.dart';
+import 'package:neyasischallenge/core/init/lang/locale_keys.g.dart';
 import 'package:neyasischallenge/core/init/network/identity_manager.dart';
 import 'package:neyasischallenge/core/init/router/app_router.dart';
 import 'package:neyasischallenge/core/service/locator/locator.dart';
@@ -16,20 +18,23 @@ class AddOrUpdateAccountCubit extends Cubit<AddOrUpdateAccountState> {
   Future<void> addOrUpdateAccount({required AccountResponseModel model}) async {
     try {
       emit(const AddOrUpdateAccountState.loading());
-      final parseModelIdentity = IdentityManager.instance.parseSop(model: model);
-      final checkIdentity = await IdentityManager.instance.checkIdentity(data: parseModelIdentity);
-      final result = await _addOrUpdateAccountService.addOrUpdateAccount(model: model);
-      if (result != null && result.statusCode == 201) {
-        emit(const AddOrUpdateAccountState.success(message: "Hesap oluşturma işlemi başarılı"));
-        getIt<AppRouter>().pushAndPopUntil(const AccountsRoute(), predicate: (_) => false);
-      } else if (result != null && result.statusCode == 200) {
-        emit(const AddOrUpdateAccountState.success(message: "Güncelleme işlemi başarılı"));
-        getIt<AppRouter>().pushAndPopUntil(const AccountsRoute(), predicate: (_) => false);
+      String? checkIdentity = await IdentityManager.instance.getCheck(model: model);
+      if (checkIdentity != null && checkIdentity.isNotEmpty && checkIdentity == "true") {
+        final result = await _addOrUpdateAccountService.addOrUpdateAccount(model: model);
+        if (result != null && result.statusCode == 201) {
+          emit(AddOrUpdateAccountState.success(message: LocaleKeys.createAccountSuccess.locale));
+          getIt<AppRouter>().pushAndPopUntil(const AccountsRoute(), predicate: (_) => false);
+        } else if (result != null && result.statusCode == 200) {
+          emit(AddOrUpdateAccountState.success(message: LocaleKeys.updateAccountSuccess.locale));
+          getIt<AppRouter>().pushAndPopUntil(const AccountsRoute(), predicate: (_) => false);
+        } else {
+          emit(AddOrUpdateAccountState.error(exceptionError: LocaleKeys.exceptionError.locale));
+        }
       } else {
-        emit(const AddOrUpdateAccountState.error(exceptionError: "Üzgünüz bir hata ile karşılaştık"));
+        emit(AddOrUpdateAccountState.error(exceptionError: LocaleKeys.exceptionIdentity.locale));
       }
     } catch (e) {
-      emit(const AddOrUpdateAccountState.error(exceptionError: "Üzgünüz bir hata ile karşılaştık"));
+      emit(AddOrUpdateAccountState.error(exceptionError: LocaleKeys.exceptionError.locale));
     }
   }
 }

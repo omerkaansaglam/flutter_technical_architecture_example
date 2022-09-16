@@ -4,6 +4,7 @@ import 'package:neyasischallenge/core/constants/navigation/navigation_constants.
 import 'package:neyasischallenge/features/accounts/view/accounts_view.dart';
 import 'package:neyasischallenge/features/add_or_update_account/model/account_response_model.dart';
 import 'package:neyasischallenge/features/add_or_update_account/view/add_or_update_account_view.dart';
+import 'package:neyasischallenge/features/splash/view/splash_view.dart';
 
 part 'app_router.gr.dart';
 
@@ -12,9 +13,13 @@ part 'app_router.gr.dart';
   routes: <AutoRoute>[
     //BottomNavigation Bar Router Settings
     AutoRoute(
+      page: SplashView,
+      path: NavigationConstants.SPLASH,
+      initial: true,
+    ),
+    AutoRoute(
       page: AccountsView,
       path: NavigationConstants.ACCOUNTS,
-      initial: true,
     ),
     AutoRoute(
       page: AddOrUpdateAccountView,

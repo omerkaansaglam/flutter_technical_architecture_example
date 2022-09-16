@@ -17,6 +17,12 @@ class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    SplashRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const SplashView(),
+      );
+    },
     AccountsRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
         routeData: routeData,
@@ -38,10 +44,8 @@ class _$AppRouter extends RootStackRouter {
   @override
   List<RouteConfig> get routes => [
         RouteConfig(
-          '/#redirect',
+          SplashRoute.name,
           path: '/',
-          redirectTo: '/accounts',
-          fullMatch: true,
         ),
         RouteConfig(
           AccountsRoute.name,
@@ -52,6 +56,18 @@ class _$AppRouter extends RootStackRouter {
           path: '/add-or-update-account',
         ),
       ];
+}
+
+/// generated route for
+/// [SplashView]
+class SplashRoute extends PageRouteInfo<void> {
+  const SplashRoute()
+      : super(
+          SplashRoute.name,
+          path: '/',
+        );
+
+  static const String name = 'SplashRoute';
 }
 
 /// generated route for

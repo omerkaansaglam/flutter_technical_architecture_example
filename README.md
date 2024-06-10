@@ -14,5 +14,4 @@ Neyasis Technology Flutter Developer Technical Case
 - Added Unit, Widget and Integration tests
 
 # Notes (Turkish) :
-Projeyi tamamladım fakat Docker tarafında çok tecrübem olmadığından dolayı AppCenter hesabı açtım ve localhost üzerinde jenkins kurulumunu yaptım. Fakat daha fazla vaktim olmadığı için ilerleyemedim. Case'i tamamlamam için 2 gün sürem olduğundan dolayı Environment variables taskini tamamlayamadım.
-Saygılarımla,
+Projenin tüm yapısı development branch'in de.

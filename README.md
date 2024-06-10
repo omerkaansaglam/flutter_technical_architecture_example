@@ -1,2 +1,2 @@
-# neyasischallenge
-Neyasis Technology Flutter Developer Technical Case
+# Flutter Technical Case
+Flutter Developer Technical Case

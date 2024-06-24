@@ -1,6 +1,6 @@
-# Technical Development Test
+#
 
-Flutter Developer Technical Case
+Test Application
 
 - Created one https://mockapi.io/ project => https://mockapi.io/projects/6321fb7682f8687273be3663
 - Builded Folder Struchture and Mvvm architecture
